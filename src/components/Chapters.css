@@ -1,0 +1,40 @@
+.chapters-container {
+  margin-top: 20px;
+  width: 100%;
+  max-height: 150px;
+  overflow-y: auto;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.chapters-container h4 {
+  margin: 0 0 10px 0;
+  text-align: left;
+  padding-left: 10px;
+  color: #ccc;
+}
+
+.chapters-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.chapters-list li button {
+  background: none;
+  border: none;
+  color: #a0cff1;
+  text-align: left;
+  width: 100%;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 14px;
+  border-radius: 3px;
+}
+
+.chapters-list li button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
