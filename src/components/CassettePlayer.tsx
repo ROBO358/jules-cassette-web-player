@@ -61,14 +61,18 @@ const CassettePlayer: React.FC = () => {
     }
   };
 
-  const togglePlayPause = () => {
+  const togglePlayPause = async () => {
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
-        audioRef.current.play();
+        try {
+          await audioRef.current.play();
+        } catch (error) {
+          console.error("Error attempting to play audio:", error);
+          setErrorMessage("Could not play audio. File might be corrupt.");
+        }
       }
-      setIsPlaying(!isPlaying);
     }
   };
 
