@@ -14,16 +14,19 @@ const CassettePlayer: React.FC = () => {
   const [audioSrc, setAudioSrc] = useState<string | null>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [chapters, setChapters] = useState<Chapter[]>([]);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handleDragOver = (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    setErrorMessage(null); // Clear error message when user starts dragging
   };
 
   const handleDrop = async (e: DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
+    setErrorMessage(null);
 
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
@@ -53,7 +56,7 @@ const CassettePlayer: React.FC = () => {
         }
 
       } else {
-        alert('Please drop an MP3 file.');
+        setErrorMessage('Please drop a valid MP3 file.');
       }
     }
   };
@@ -86,7 +89,11 @@ const CassettePlayer: React.FC = () => {
       >
         {!audioSrc ? (
           <div className="drop-zone">
-            <p>Drag & Drop an MP3 file here</p>
+            {errorMessage ? (
+              <p className="error-message">{errorMessage}</p>
+            ) : (
+              <p>Drag & Drop an MP3 file here</p>
+            )}
           </div>
         ) : (
           <>

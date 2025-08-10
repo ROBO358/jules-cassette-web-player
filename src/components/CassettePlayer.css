@@ -51,6 +51,12 @@
     margin: 0;
 }
 
+.error-message {
+  color: #ff8a8a;
+  font-weight: bold;
+  padding: 10px;
+}
+
 .reels {
   display: flex;
   justify-content: space-around;
