@@ -82,6 +82,13 @@ const CassettePlayer: React.FC = () => {
     }
   };
 
+  const handleAudioError = () => {
+    console.error("Error loading audio source.");
+    setErrorMessage("Failed to load audio. File may be corrupt or unsupported.");
+    setAudioSrc(null); // Reset the player
+    setChapters([]);
+  };
+
   return (
     <div
       className="cassette-player-wrapper"
@@ -113,7 +120,15 @@ const CassettePlayer: React.FC = () => {
             />
           </>
         )}
-        {audioSrc && <audio ref={audioRef} src={audioSrc} onPlay={() => setIsPlaying(true)} onPause={() => setIsPlaying(false)} />}
+        {audioSrc && (
+          <audio
+            ref={audioRef}
+            src={audioSrc}
+            onPlay={() => setIsPlaying(true)}
+            onPause={() => setIsPlaying(false)}
+            onError={handleAudioError}
+          />
+        )}
       </div>
       {chapters.length > 0 && (
         <Chapters chapters={chapters} onChapterClick={handleChapterClick} />
