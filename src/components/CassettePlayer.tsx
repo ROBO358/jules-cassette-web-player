@@ -28,7 +28,11 @@ const CassettePlayer: React.FC = () => {
     const files = e.dataTransfer.files;
     if (files && files.length > 0) {
       const file = files[0];
-      if (file.type === 'audio/mpeg') {
+      const acceptedTypes = ['audio/mpeg', 'audio/mp3', 'audio/mpeg3'];
+      const isMp3Type = acceptedTypes.includes(file.type);
+      const isMp3Extension = file.name.toLowerCase().endsWith('.mp3');
+
+      if (isMp3Type || isMp3Extension) {
         const fileUrl = URL.createObjectURL(file);
         setAudioSrc(fileUrl);
 
